@@ -1,0 +1,6 @@
+Dockerfile
+dbt_modules
+dbt_packages
+logs
+target
+.user.yml

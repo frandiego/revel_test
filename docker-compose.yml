@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+    postgres:
+        image: postgres:12
+        container_name: postgres
+        restart: always
+        environment:
+          POSTGRES_USER: dbt
+          POSTGRES_PASSWORD: dbtpassword
+          POSTGRES_DB: revel
+        ports:
+          - 5432:5432
+        networks:
+          - backend
+
+
+    dbt:
+        build:
+          context: ./dbt
+          dockerfile: Dockerfile
+        container_name: dbt
+        volumes:
+          - ./dbt:/dbt
+        command: /bin/bash -c "make run"
+        networks:
+          - backend
+        links:
+          - postgres
+        depends_on:
+          - postgres
+
+networks:
+  backend:
+    driver: "bridge"

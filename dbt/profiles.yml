@@ -1,0 +1,14 @@
+config:
+  partial_parse: true
+revel_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      threads: 2
+      host: postgres
+      port: 5432
+      user: dbt
+      pass: dbtpassword
+      database: revel
+      schema: analytics
