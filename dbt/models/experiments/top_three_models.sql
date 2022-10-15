@@ -15,7 +15,7 @@ select
 	sum(trip_distance) as total_distance, 
 	sum(trip_time) as total_time
 
-from {{ ref ('view_trip_time') }}
+from {{ ref ('view_car_trip_time') }}
 group by car_id
 having sum(trip_distance) > 12000
 

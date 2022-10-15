@@ -18,5 +18,4 @@ compile: ingest
 	dbt compile
 
 run: compile
-	dbt run
-
+	dbt run 

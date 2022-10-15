@@ -7,6 +7,18 @@
 }}
 
 
+WITH aux AS (
+
+	select
+		car_id, 
+		sum(trip_distance) as trip_distance
+
+	from {{ source('analytics', 'trips') }} 
+
+	group by car_id
+
+)
+
 select 
 	l.id, 
 	cylinders, 
@@ -23,7 +35,8 @@ select
 		end as weight_category,
 	price, 
 	manufacturer_name, 
-	m.car_name
+	m.car_name, 
+	aux.trip_distance
 
 
 from {{ source('analytics', 'fleet') }} l
@@ -33,3 +46,6 @@ join {{ source('analytics', 'country') }} r using (origin)
 join {{ source('analytics', 'price') }} p using (id)
 
 join {{ ref('manufacturer') }} m on l.id = m.car_id 
+
+join aux on aux.car_id = l.id
+

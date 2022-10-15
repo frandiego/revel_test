@@ -1,4 +1,4 @@
-{% macro pivot_table (columns_to_show, pivot_column, aggregate_column, table_name) %}
+{% macro pivot_table (index_columns, pivot_column, aggregate_column, table_name) %}
 
 
 {%- set my_query -%}
@@ -16,17 +16,17 @@ SELECT distinct {{pivot_column}}  FROM {{table_name}} ORDER BY {{pivot_column}} 
 
 
 
-SELECT {{columns_to_show}} ,
+SELECT {{index_columns}} ,
 {%- for i in items %}
 sum("{{i}}") AS "{{i}}"
 {%- if not loop.last %} , {% endif -%}
 {%- endfor %}
 FROM (
-        SELECT  {{columns_to_show}},  
+        SELECT  {{index_columns}},  
         {%- for i in items %}
         CASE WHEN {{pivot_column}} = '{{i}}'  THEN {{aggregate_column}} ELSE 0 END AS "{{i}}"
         {%- if not loop.last %} , {% endif -%}
         {%- endfor %}
-        FROM {{table_name}}   ) t
-GROUP BY  {{columns_to_show}} 
+        FROM {{table_name}}  ) t
+GROUP BY  {{index_columns}} 
 {% endmacro %}

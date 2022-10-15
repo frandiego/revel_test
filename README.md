@@ -1,6 +1,6 @@
 
 ## REVEL TEST
-I have done this test using docker, python and dbt because in the conversation with Fabricio I understood that dbt is a crucial technology in Revel.
+I have done this test using docker, python and dbt. 
 All development has been dockerised in a docker compose containing two services `postgres` (the database) and `dbt` (the data model).
 If you want to run the code clone the repository and in the same directory run:
 ````
@@ -15,9 +15,9 @@ database: revel
 port: 5432
 ````
 In the database you can access:
-* Schema `analytics` fo (`contry`, `fleet`, `price`, `trips`) and also the  `manufacturer` with information of the manufacturer of each car or the `trip_time` which is a view with information of the time taken in each trip
-* Schema `analytics_summary`  with the table `manufacturer` that containts information of the second question (Number of trips done by car manufacturer,  Total distance travelled and average trip distance travelled by car manufacturer, Average trip duration in minutes by car manufacturer). 
-* Schema `analytics_experiment` with the table `top_three_models` (info of the top three car model per manufacturer), `manufacturer_weight_tabular` and `car_info` which are auxiliar tables for `european_prices` (minimum, average and maximum car price for each European manufacturer and # of cylinders) and `manufacturer_weight` (km per manufacturer and weight group)
+* Schema `analytics` fo (`contry`, `fleet`, `price`, `trips`) and also the  `manufacturer` with information of the manufacturer of each car 
+* Schema `analytics_summary`  with the table `summary_manufacturer` that containts information of the second question (Number of trips done by car manufacturer,  Total distance travelled and average trip distance travelled by car manufacturer, Average trip duration in minutes by car manufacturer). 
+* Schema `analytics_experiment` with the table `top_three_models` (info of the top three car model per manufacturer), `car_info` which are auxiliar tables for `european_prices` (minimum, average and maximum car price for each European manufacturer and # of cylinders) and `manufacturer_matrix` (km per manufacturer and weight group)
 
 
 ## Functionality: 
@@ -29,3 +29,6 @@ We can see the steps followed by the dbt service in the makefile file, as it con
 5. `ingest`.  Execute `python ingest_trips.py` that create a table for trips.csv becase it has 1_510_723 rows and is too heavy for dbt seed, actually we have use [dask.dataframe](https://docs.dask.org/en/stable/dataframe.html) to scale up the ingestion. 
 6. `compile`. Exeucte `dbt compile` that genereate the executables sql. 
 7. `run`. Execute `dbt run` that makes the dbt magic and create the data model in the database. 
+
+## Restrictions
+Trips data has been uploaded in feather format in order to avoid Github limit. 
