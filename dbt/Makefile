@@ -19,3 +19,9 @@ compile: ingest
 
 run: compile
 	dbt run 
+
+docs: run
+	dbt docs generate
+
+serve: docs
+	dbt docs serve --port 8080

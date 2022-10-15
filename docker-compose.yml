@@ -22,14 +22,15 @@ services:
         container_name: dbt
         volumes:
           - ./dbt:/dbt
-        command: /bin/bash -c "make run"
+        command: /bin/bash -c "make serve"
         networks:
           - backend
         links:
           - postgres
         depends_on:
           - postgres
-
+        ports:
+          - 8080:8080
 networks:
   backend:
     driver: "bridge"
