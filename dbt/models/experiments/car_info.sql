@@ -2,7 +2,8 @@
     config(
         materialized="table",
         name='car_info', 
-        schema='experiment'
+        schema='experiment', 
+		tags=['experiment']
     ) 
 }}
 

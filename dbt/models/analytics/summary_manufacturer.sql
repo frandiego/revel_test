@@ -2,7 +2,8 @@
     config(
         materialized="table",
         name='manufacturer', 
-        schema='summary'
+        schema='summary', 
+        tags=['analytics']
     ) 
 }}
 

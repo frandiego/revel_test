@@ -1,7 +1,8 @@
 {{ 
     config(
         materialized="view",
-        name='trip_time'
+        name='trip_time', 
+        tags=['analytics']
     ) 
 }}
 

@@ -2,7 +2,8 @@
     config(
         materialized="table",
         name='european_prices', 
-        schema='experiment'
+        schema='experiment', 
+        tags=['experiment']
     ) 
 }}
 

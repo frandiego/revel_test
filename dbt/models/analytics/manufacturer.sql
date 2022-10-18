@@ -1,7 +1,8 @@
 {{ 
     config(
         materialized="table",
-        name='manufacturer'
+        name='manufacturer', 
+        tags=['analytics']
     ) 
 }}
 

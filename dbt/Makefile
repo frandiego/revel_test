@@ -14,13 +14,16 @@ seed: deps
 ingest: seed
 	python ingest_trips.py
 
-compile: ingest
-	dbt compile
+analytics: ingest
+	dbt run --select tags:analytics
 
-run: compile
-	dbt run 
+experiment: analytics
+	dbt run --select tags:experiment
 
-docs: run
+matrix: analytics
+	dbt run --select tags:matrix
+
+docs: matrix
 	dbt docs generate
 
 serve: docs

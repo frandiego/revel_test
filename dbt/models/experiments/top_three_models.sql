@@ -2,7 +2,8 @@
     config(
         materialized="table",
         name='top_three_models', 
-        schema='experiment'
+        schema='experiment', 
+        tags=['experiment']
     ) 
 }}
 

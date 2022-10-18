@@ -2,7 +2,8 @@
     config(
         materialized="table",
         name='manufacturer_matrix', 
-        schema='experiment'
+        schema='experiment', 
+		tags=['matrix']
     ) 
 }}
 
