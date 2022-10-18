@@ -1,6 +1,6 @@
 
 clean:
-	python clean_schema.py
+	python scripts/clean_schema.py
 
 debug: clean
 	dbt debug
@@ -12,16 +12,16 @@ seed: deps
 	dbt seed
 
 ingest: seed
-	python ingest_trips.py
+	python scripts/ingest_trips.py
 
 analytics: ingest
-	dbt run --select tags:analytics
+	dbt run --select tag:analytics
 
 experiment: analytics
-	dbt run --select tags:experiment
+	dbt run --select tag:experiment
 
 matrix: analytics
-	dbt run --select tags:matrix
+	dbt run --select tag:matrix
 
 docs: matrix
 	dbt docs generate

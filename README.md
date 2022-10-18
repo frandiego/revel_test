@@ -31,10 +31,11 @@ We can see the steps followed by the dbt service in the makefile file, as it con
 3. `deps`. Execute `dbt deps` to install dbt packages (we have user dbt-utils)
 4. `seed`. Execute `dbt seed` to upload the csv in data folder (country, fleet and price) and create a table per csv. (Trips are not there because its too heave )
 5. `ingest`.  Execute `python ingest_trips.py` that create a table for trips.csv becase it has 1_510_723 rows and is too heavy for dbt seed, actually we have use [dask.dataframe](https://docs.dask.org/en/stable/dataframe.html) to scale up the ingestion. 
-6. `compile`. Exeucte `dbt compile` that genereate the executables sql. 
-7. `run`. Execute `dbt run` that makes the dbt magic and create the data model in the database. 
-7. `docs`. Execute `dbt docs generate` to generate the auto documentation
-7. `serve`. Execute `dbt docs servve` to serve the documentation at 8080.
+6. `analytics`. Exeucte `dbt run --select tag:analytics` that run analytics models.
+7. `experiment`. Exeucte `dbt run --select tag:experiment` that run experiment models.
+8. `matrix`. Exeucte `dbt run --select tag:matrix` that run the manufacturer matrix.
+9.  `docs`. Execute `dbt docs generate` to generate the auto documentation
+10. `serve`. Execute `dbt docs servve` to serve the documentation at 8080.
 
 ## Restrictions
 Trips data has been uploaded in feather format in order to avoid Github limit. 
